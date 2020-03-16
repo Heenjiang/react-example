@@ -2,19 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-// class Square extends React.Component {
-//     render() {
-//       return (
-//         <button
-//           className="square"
-//           onClick={() => this.props.onClick()}
-//         >
-//           {this.props.value}
-//         </button>
-//       );
-//     }
-//   }
-
 function Square(props){
     return (
         <button 
@@ -70,14 +57,20 @@ class Game extends React.Component {
         }
     
     handleClick (i){
+        //根据当前的stepNumber复制history数组（因为由回溯功能，相当于如果用户点了回到之前的一步，然后就会
+        //改变stepNbumber,从而导致history也会相对更新）
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        //从history里复制出当前棋局数组的状态
         const current =  history[history.length - 1]
+        //复制当前棋局状态
         const squares = current.squares.slice();
         //当某个玩家已经胜出时，或者这个square已经被点击过了，就什么也不做
         if (calculateWinner(squares) || squares[i]){
             return;
         }
+        //根据双方轮换顺序设置当前点击方块的符号
         squares[i] = this.state.xIsNext ? 'X' : 'O'
+        //更新game的属性
         this.setState({
             history: history.concat([{
                 squares: squares,
@@ -98,6 +91,7 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
+        //step:是一个数组对象，move是数组的下标
         const moves = history.map((step, move) => {
             const desc = move ?
               'Go to move #' + move :
@@ -131,8 +125,6 @@ class Game extends React.Component {
       );
     }
   }
-  
-  // ========================================
   
   ReactDOM.render(
     <Game />,
