@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM, { unstable_renderSubtreeIntoContainer } from 'react-dom';
+import ReactDOM from 'react-dom';
 import './index.css';
 
 
