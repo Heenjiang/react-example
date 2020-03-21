@@ -1,0 +1,8 @@
+{
+    "editor.accessibilitySupport": "on",
+    "editor.tokenColorCustomizations": {
+        "[Material Theme]": {
+            "semanticHighlighting": true
+        }
+    },
+}
